@@ -26,16 +26,16 @@ public class InputView {
         return userInput();
     }
 
-    public void WeekendWorkWorkInput() {
+    public String WeekendWorkWorkInput() {
         printMessage(BLANK);
         printMessage(WEEKDAY_EMERGENCY_WORK_MESSAGE);
-        Console.readLine();
+        return userInput();
     }
 
-    public void holidayWorkInput() {
+    public String holidayWorkInput() {
         printMessage(BLANK);
         printMessage(HOLIDAY_EMERGENCY_WORK_MESSAGE);
-        Console.readLine();
+        return userInput();
     }
 
     private void printMessage(String message) {

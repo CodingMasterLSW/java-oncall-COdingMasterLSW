@@ -1,6 +1,8 @@
 package oncall.controller;
 
+import java.util.List;
 import oncall.service.OnCallService;
+import oncall.utils.InputParser;
 import oncall.view.InputView;
 import oncall.view.OutputView;
 
@@ -19,8 +21,11 @@ public class OnCallController {
     public void start() {
         inputView.printMonthAndDayMessage();
         inputView.monthAndDayInput();
-        inputView.WeekendWorkWorkInput();
-        inputView.holidayWorkInput();
+        String weekWorkers = inputView.WeekendWorkWorkInput();
+        String holidayWorkers = inputView.holidayWorkInput();
+        List<String> parse1 = InputParser.parse(weekWorkers);
+        List<String> parse2 = InputParser.parse(holidayWorkers);
     }
+
 
 }
