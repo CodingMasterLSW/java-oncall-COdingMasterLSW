@@ -16,4 +16,9 @@ public class OnCallController {
         this.onCallservice = onCallservice;
     }
 
+    public void start() {
+        inputView.printMonthAndDayMessage();
+        inputView.monthAndDayInput();
+    }
+
 }
