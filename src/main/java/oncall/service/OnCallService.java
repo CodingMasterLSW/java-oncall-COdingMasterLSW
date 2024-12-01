@@ -6,11 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import oncall.domain.Worker;
 import oncall.domain.Workers;
+import oncall.domain.WorkingDay;
 import oncall.utils.InputParser;
 
 public class OnCallService {
 
-    public Workers create(String userInput) {
+    public Workers createWorkers(String userInput) {
         List<Worker> workers = new ArrayList<>();
 
         List<String> parsers = InputParser.parse(userInput);
@@ -19,6 +20,13 @@ public class OnCallService {
             workers.add(worker);
         }
         return Workers.from(workers);
+    }
+
+    public WorkingDay createWorkingDay(String userInput) {
+        List<String> parsers = InputParser.parseWorkingDay(userInput);
+        String month = parsers.get(0);
+        String day = parsers.get(1);
+        return WorkingDay.of(Integer.parseInt(month), day);
     }
 
     public void addHolidayWorker(Workers workers, String inputHolidayWorkers) {
