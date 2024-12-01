@@ -1,8 +1,8 @@
 package oncall.controller;
 
-import java.util.List;
+import oncall.domain.Worker;
+import oncall.domain.Workers;
 import oncall.service.OnCallService;
-import oncall.utils.InputParser;
 import oncall.view.InputView;
 import oncall.view.OutputView;
 
@@ -23,8 +23,11 @@ public class OnCallController {
         inputView.monthAndDayInput();
         String weekWorkers = inputView.WeekendWorkWorkInput();
         String holidayWorkers = inputView.holidayWorkInput();
-        List<String> parse1 = InputParser.parse(weekWorkers);
-        List<String> parse2 = InputParser.parse(holidayWorkers);
+
+        Workers workers = onCallservice.create(weekWorkers);
+        for (Worker worker : workers.getWeekWorkers()) {
+            System.out.println(worker.getName());
+        }
     }
 
 
