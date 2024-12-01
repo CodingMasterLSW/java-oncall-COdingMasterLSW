@@ -28,6 +28,8 @@ public class OnCallController {
         for (Worker worker : workers.getWeekWorkers()) {
             System.out.println(worker.getName());
         }
+
+        onCallservice.addHolidayWorker(workers ,holidayWorkers);
     }
 
 
