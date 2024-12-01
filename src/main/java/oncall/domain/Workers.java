@@ -26,7 +26,6 @@ public class Workers {
 
     public void addHolidayWorker(List<Worker> inputHolidayWorkers) {
         validateDuplicateWorker(inputHolidayWorkers);
-        validateHolidayWorkers(inputHolidayWorkers);
         for (Worker worker : inputHolidayWorkers) {
             holidayWorkers.add(worker);
         }
@@ -54,27 +53,4 @@ public class Workers {
         }
     }
 
-    private void validateHolidayWorkers(List<Worker> holidayWorkers) {
-        if (!holidayWorkers.equals(weekWorkers)) {
-            throw new IllegalArgumentException(INVALID_INPUT.getMessage());
-        }
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
-        if (object == null || getClass() != object.getClass()) {
-            return false;
-        }
-        Workers workers = (Workers) object;
-        return Objects.equals(weekWorkers, workers.weekWorkers) && Objects.equals(
-                holidayWorkers, workers.holidayWorkers);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(weekWorkers, holidayWorkers);
-    }
 }
