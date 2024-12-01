@@ -19,6 +19,8 @@ public class OnCallController {
     public void start() {
         inputView.printMonthAndDayMessage();
         inputView.monthAndDayInput();
+        inputView.WeekendWorkWorkInput();
+        inputView.holidayWorkInput();
     }
 
 }
