@@ -14,6 +14,11 @@ public class WorkingDay {
         return new WorkingDay(month, startingDay);
     }
 
+    public int getMonth() {
+        return month;
+    }
 
-
+    public String getStartingDay() {
+        return startingDay;
+    }
 }
