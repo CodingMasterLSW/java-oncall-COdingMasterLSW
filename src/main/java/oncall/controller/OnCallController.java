@@ -1,8 +1,10 @@
 package oncall.controller;
 
+import java.util.List;
 import java.util.function.Supplier;
 import oncall.domain.Calender;
 import oncall.domain.Week;
+import oncall.domain.Worker;
 import oncall.domain.Workers;
 import oncall.domain.WorkingDay;
 import oncall.service.OnCallService;
@@ -30,11 +32,28 @@ public class OnCallController {
         // 여기서 int 값을 반환하고, 7로 나눠야함.
         int startingDayValue = workingDay.getStartingDayValue();
         Calender month = workingDay.getMonth();
+        int weekIdx = 0;
+        int holidayIdx = 0;
 
-        for (int i=1; i<=month.getEndDate(); i++) {
+        for (int i = 1; i <= month.getEndDate(); i++) {
             int decisionResult = startingDayValue % 7;
             Week weekByValue = Week.findWeekByValue(decisionResult);
-            System.out.println(month.getMonth()+"월 " + i+"일 " + weekByValue.getName());
+            boolean holiday = weekByValue.isHoliday();
+            if (holiday) {
+                List<Worker> holidayWorkers = workers.getHolidayWorkers();
+                int currentIdx = holidayIdx % holidayWorkers.size();
+                Worker worker = holidayWorkers.get(currentIdx);
+                System.out.println(month.getMonth() + "월 " + i + "일 " + weekByValue.getName() + " "
+                        + worker.getName());
+                holidayIdx++;
+            } else {
+                List<Worker> weekWorkers = workers.getWeekWorkers();
+                int currentIdx = weekIdx % weekWorkers.size();
+                Worker worker = weekWorkers.get(currentIdx);
+                System.out.println(month.getMonth() + "월 " + i + "일 " + weekByValue.getName() + " "
+                        + worker.getName());
+                weekIdx++;
+            }
             startingDayValue++;
         }
     }
