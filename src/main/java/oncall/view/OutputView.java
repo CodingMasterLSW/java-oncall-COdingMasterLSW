@@ -1,8 +1,7 @@
 package oncall.view;
 
-import oncall.domain.Calender;
-import oncall.domain.Week;
-import oncall.domain.Worker;
+import oncall.domain.AssignmentResult;
+import oncall.domain.AssignmentResults;
 
 public class OutputView {
 
@@ -22,17 +21,19 @@ public class OutputView {
         printMessage(message);
     }
 
-    public void printAssignResult(Calender calender, int currentDay, Week week, Worker worker) {
-        System.out.printf(ASSIGNMENT_RESULT, calender.getMonth(), currentDay, week.getName(),
-                worker.getName());
+    public void printAssignResults(AssignmentResults assignmentResults) {
+        for (AssignmentResult assignmentResult : assignmentResults.getAssignmentResults()) {
+            printAssignmentResult(assignmentResult);
+        }
+    }
+
+    private void printAssignmentResult(AssignmentResult assignmentResult) {
+        System.out.printf(ASSIGNMENT_RESULT, assignmentResult.getMonth(),
+                assignmentResult.getDate(), assignmentResult.getDay(),
+                assignmentResult.getWorker().getName());
         printMessage(BLANK);
     }
 
-    public void printAssignResultHoliday(Calender calender, int currentDay, Week week, Worker worker) {
-        System.out.printf(ASSIGNMENT_RESULT2, calender.getMonth(), currentDay, week.getName(),
-                worker.getName());
-        printMessage(BLANK);
-    }
 
     private void printMessage(String message) {
         System.out.println(message);
