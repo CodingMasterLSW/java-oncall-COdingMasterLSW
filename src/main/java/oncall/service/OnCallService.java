@@ -76,16 +76,17 @@ public class OnCallService {
                     Worker worker = holidayWorkers.get(currentIdx);
                     AssignmentResult assignmentResult = AssignmentResult.of(month.getMonth(), i,
                             weekByValue.getName(), worker);
+                    assignmentResult.changeHoliday();
                     assignmentResults.addResult(assignmentResult);
-
                     holidayIdx++;
+                } else {
+                    int currentIdx = weekIdx % weekWorkers.size();
+                    Worker worker = weekWorkers.get(currentIdx);
+                    AssignmentResult assignmentResult = AssignmentResult.of(month.getMonth(), i,
+                            weekByValue.getName(), worker);
+                    assignmentResults.addResult(assignmentResult);
+                    weekIdx++;
                 }
-                int currentIdx = weekIdx % weekWorkers.size();
-                Worker worker = weekWorkers.get(currentIdx);
-                AssignmentResult assignmentResult = AssignmentResult.of(month.getMonth(), i,
-                        weekByValue.getName(), worker);
-                assignmentResults.addResult(assignmentResult);
-                weekIdx++;
             }
             startingDayValue++;
 
