@@ -1,5 +1,7 @@
 package oncall.domain;
 
+import java.util.Arrays;
+
 public enum Holiday {
 
     신정("신정", 1, 1),
@@ -21,15 +23,14 @@ public enum Holiday {
         this.day = day;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getMonth() {
-        return month;
-    }
-
-    public int getDay() {
-        return day;
+    public static boolean isHoliday(int month, int day) {
+        Holiday isHoliday = Arrays.stream(Holiday.values())
+                .filter(holiday -> holiday.month == month && holiday.day == day)
+                .findFirst()
+                .orElse(null);
+        if (isHoliday == null) {
+            return false;
+        }
+        return true;
     }
 }

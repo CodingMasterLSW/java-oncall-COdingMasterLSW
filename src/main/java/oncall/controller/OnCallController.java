@@ -3,6 +3,7 @@ package oncall.controller;
 import java.util.List;
 import java.util.function.Supplier;
 import oncall.domain.Calender;
+import oncall.domain.Holiday;
 import oncall.domain.Week;
 import oncall.domain.Worker;
 import oncall.domain.Workers;
@@ -44,6 +45,13 @@ public class OnCallController {
                 outputView.printAssignResult(month, i, weekByValue, worker);
                 holidayIdx++;
             } else {
+                if (Holiday.isHoliday(month.getMonth(), i)) {
+                    List<Worker> holidayWorkers = workers.getHolidayWorkers();
+                    int currentIdx = holidayIdx % holidayWorkers.size();
+                    Worker worker = holidayWorkers.get(currentIdx);
+                    outputView.printAssignResultHoliday(month, i, weekByValue, worker);
+                    holidayIdx++;
+                }
                 List<Worker> weekWorkers = workers.getWeekWorkers();
                 int currentIdx = weekIdx % weekWorkers.size();
                 Worker worker = weekWorkers.get(currentIdx);
