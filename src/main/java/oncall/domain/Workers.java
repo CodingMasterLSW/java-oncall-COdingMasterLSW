@@ -1,12 +1,10 @@
 package oncall.domain;
 
 import static oncall.exception.ErrorMessage.DUPLICATE_WORKER;
-import static oncall.exception.ErrorMessage.INVALID_INPUT;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 public class Workers {
@@ -53,4 +51,7 @@ public class Workers {
         }
     }
 
+    public Worker getHolidayWorkerByIdx(int holidayWorkerIdx) {
+        return  holidayWorkers.get(holidayWorkerIdx);
+    }
 }

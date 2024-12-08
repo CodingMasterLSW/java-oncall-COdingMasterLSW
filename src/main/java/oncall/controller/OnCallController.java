@@ -24,33 +24,19 @@ public class OnCallController {
 
     public void start() {
         WorkingDay workingDay = handleMonthInput();
-        handleWorkers();
+        // 여기서 이미 객체 만들어졌음. 이제 요일 따라서 출력만 하면 되는데
+        Workers workers = handleWorkers();
 
-        Calender calender = Calender.decideCalender(workingDay.getMonth());
-        int endDate = calender.getEndDate();
+        // 여기서 int 값을 반환하고, 7로 나눠야함.
+        int startingDayValue = workingDay.getStartingDayValue();
+        Calender month = workingDay.getMonth();
 
-
-        int idx = 1;
-        String startingDay = workingDay.getStartingDay();
-        int month = workingDay.getMonth();
-        Week week = Week.findWeekByName(startingDay);
-        int tmpValue = week.getValue();
-
-        /***
-         * 요일 계산 로직
-         */
-        while (true) {
-            int value = tmpValue % 7;
-            Week weekByValue = Week.findWeekByValue(value);
-            System.out.println(month +"월 " + idx+"일 " + weekByValue.getName());
-            idx++;
-            tmpValue++;
-
-            if (idx > endDate) {
-                break;
-            }
+        for (int i=1; i<=month.getEndDate(); i++) {
+            int decisionResult = startingDayValue % 7;
+            Week weekByValue = Week.findWeekByValue(decisionResult);
+            System.out.println(month.getMonth()+"월 " + i+"일 " + weekByValue.getName());
+            startingDayValue++;
         }
-
     }
 
     private WorkingDay handleMonthInput() {
@@ -61,13 +47,6 @@ public class OnCallController {
         });
     }
 
-    /*
-    private WorkingDay handleCreateWorkingDay(String monthAndDay) {
-        WorkingDay workingDay = retryOnInvalidInput(
-                () -> onCallservice.createWorkingDay(monthAndDay));
-        return workingDay;
-    }
-     */
     private Workers handleWorkers() {
         return retryOnInvalidInput(() -> {
             String weekWorkers = inputView.WeekendWorkWorkInput();

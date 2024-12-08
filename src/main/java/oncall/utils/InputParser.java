@@ -49,12 +49,10 @@ public class InputParser {
 
     private static void validateWorkingDayInputOnDay(List<String> splitResult) {
         String day = splitResult.get(1);
-        if (day.equals("월") || day.equals("화") || day.equals("수") || day.equals("목") || day.equals(
-                "금") || day.equals("토") || day.equals("일")) {
-            return;
+        List<String> days = List.of("월", "화", "수", "목", "금", "토", "일");
+        if (!days.contains(day)) {
+            throw new IllegalArgumentException(INVALID_INPUT.getMessage());
         }
-        throw new IllegalArgumentException(INVALID_INPUT.getMessage());
     }
-
 
 }

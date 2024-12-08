@@ -14,11 +14,16 @@ public class WorkingDay {
         return new WorkingDay(month, startingDay);
     }
 
-    public int getMonth() {
-        return month;
-    }
-
     public String getStartingDay() {
         return startingDay;
+    }
+
+    public int getStartingDayValue() {
+        Week week = Week.findWeekByName(startingDay);
+        return week.getValue();
+    }
+
+    public Calender getMonth() {
+        return Calender.decideCalender(month);
     }
 }
