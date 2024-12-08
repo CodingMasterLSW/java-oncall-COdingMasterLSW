@@ -26,10 +26,8 @@ public class OnCallController {
 
     public void start() {
         WorkingDay workingDay = handleMonthInput();
-        // 여기서 이미 객체 만들어졌음. 이제 요일 따라서 출력만 하면 되는데
         Workers workers = handleWorkers();
 
-        // 여기서 int 값을 반환하고, 7로 나눠야함.
         int startingDayValue = workingDay.getStartingDayValue();
         Calender month = workingDay.getMonth();
         int weekIdx = 0;
@@ -43,15 +41,13 @@ public class OnCallController {
                 List<Worker> holidayWorkers = workers.getHolidayWorkers();
                 int currentIdx = holidayIdx % holidayWorkers.size();
                 Worker worker = holidayWorkers.get(currentIdx);
-                System.out.println(month.getMonth() + "월 " + i + "일 " + weekByValue.getName() + " "
-                        + worker.getName());
+                outputView.printAssignResult(month, i, weekByValue, worker);
                 holidayIdx++;
             } else {
                 List<Worker> weekWorkers = workers.getWeekWorkers();
                 int currentIdx = weekIdx % weekWorkers.size();
                 Worker worker = weekWorkers.get(currentIdx);
-                System.out.println(month.getMonth() + "월 " + i + "일 " + weekByValue.getName() + " "
-                        + worker.getName());
+                outputView.printAssignResult(month, i, weekByValue, worker);
                 weekIdx++;
             }
             startingDayValue++;

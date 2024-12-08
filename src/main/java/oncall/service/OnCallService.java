@@ -41,6 +41,7 @@ public class OnCallService {
         workers.addHolidayWorker(tmpWorkers);
     }
 
+
     private void validateWorker(Worker worker) {
         if (worker == null) {
             throw new IllegalArgumentException(INVALID_INPUT.getMessage());
